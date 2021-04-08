@@ -37,7 +37,7 @@ class Multimedia(models.Model):
     tipo= models.CharField(max_length=45)
 
 #-----------------------------------------------
-    class Intercambio(models.Model):
+class Intercambio(models.Model):
     universidad_destino = models.CharField(max_length=55)
     periodo = models.CharField(max_length=45)
     pais = models.CharField(max_length=45)
