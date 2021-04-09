@@ -13,6 +13,16 @@ class Carrera(models.Model):
     description = models.CharField(max_length=250)
     Facultad_idFacultad = models.ForeignKey(Facultad, on_delete= models.CASCADE,default="DEFAULT-VALUE")
 
+#-----------------------------------------------
+class Intercambio(models.Model):
+    id_intercambio = models.AutoField(primary_key=True, unique=True, editable=False)
+    universidad_destino = models.CharField(max_length=55)
+    periodo = models.CharField(max_length=45)
+    pais = models.CharField(max_length=45)
+    tipo= models.CharField(max_length=45)
+    descripcion= models.CharField(max_length=450)
+
+
 class Alumno(models.Model):
     id_alumno = models.AutoField(primary_key=True, unique=True, editable=False)
     name = models.CharField(max_length=45)
@@ -48,11 +58,3 @@ class Multimedia(models.Model):
     tipo= models.CharField(max_length=45)
     Publicacion_idPublicacion = models.ForeignKey(Publicacion,on_delete = models.CASCADE,default="DEFAULT-VALUE")
 
-#-----------------------------------------------
-class Intercambio(models.Model):
-    id_intercambio = models.AutoField(primary_key=True, unique=True, editable=False)
-    universidad_destino = models.CharField(max_length=55)
-    periodo = models.CharField(max_length=45)
-    pais = models.CharField(max_length=45)
-    tipo= models.CharField(max_length=45)
-    descripcion= models.CharField(max_length=450)
