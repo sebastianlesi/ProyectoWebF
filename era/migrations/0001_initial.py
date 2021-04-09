@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=45)),
                 ('lastname', models.CharField(max_length=55)),
                 ('semestre', models.IntegerField()),
-                ('telefono', models.CharField(max_length=9)),
+                ('telefono', models.CharField(max_length=10)),
                 ('correo', models.CharField(max_length=60)),
                 ('clave', models.CharField(max_length=35)),
                 ('fecha_nac', models.DateTimeField()),
