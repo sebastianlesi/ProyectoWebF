@@ -6,7 +6,7 @@ class Facultad(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
 
-class Payaso(models.Model):
+class Carrera(models.Model):
     id_carrera = models.AutoField(primary_key=True, unique=True, editable=False)
     name = models.CharField(max_length=45)
     abreviado = models.CharField(max_length=20)
@@ -33,7 +33,7 @@ class Alumno(models.Model):
     clave = models.CharField(max_length=35)
     fecha_nac= models.DateTimeField()
     Genero = models.CharField(max_length=20)
-    Carrera_idCarrera = models.ForeignKey(Payaso, on_delete = models.CASCADE ,default=0)
+    Carrera_idCarrera = models.ForeignKey(Carrera, on_delete = models.CASCADE ,default=0)
     Intercambio_idintercambio = models.ForeignKey(Intercambio, on_delete = models.CASCADE ,default=0)
 
 class Comentario(models.Model):
