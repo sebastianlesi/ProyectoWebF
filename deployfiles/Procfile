@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn td.wsgi
+web: gunicorn eracom.wsgi
