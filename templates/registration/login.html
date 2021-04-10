@@ -1,0 +1,26 @@
+{% if user.is_authenticated %}
+    <h2>You are Login</h2>
+{% else %}
+    <h2>Login</h2>
+    <form method="post" action="{% url 'loginPage' %}">
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+            <tr>
+                <td><input type="hidden" name="next" value="{% url 'loginPage' %}"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="login" />
+        {% csrf_token %}
+        </table>
+    </form>
+{% endif %}
+{% if form.errors %}
+    <p> Error. Please try again.</p>
+{% endif %} 

@@ -11,7 +11,7 @@ class Carrera(models.Model):
     name = models.CharField(max_length=45)
     abreviado = models.CharField(max_length=20)
     description = models.CharField(max_length=250)
-    Facultad_idFacultad = models.ForeignKey(Facultad, on_delete= models.CASCADE,default=0)
+    Facultad_idFacultad = models.ForeignKey(Facultad, on_delete= models.CASCADE,default="1")
 
 #-----------------------------------------------
 class Intercambio(models.Model):
@@ -33,15 +33,15 @@ class Alumno(models.Model):
     clave = models.CharField(max_length=35)
     fecha_nac= models.DateTimeField()
     Genero = models.CharField(max_length=20)
-    Carrera_idCarrera = models.ForeignKey(Carrera, on_delete = models.CASCADE ,default=0)
-    Intercambio_idintercambio = models.ForeignKey(Intercambio, on_delete = models.CASCADE ,default=0)
+    Carrera_idCarrera = models.ForeignKey(Carrera, on_delete = models.CASCADE ,default="1")
+    Intercambio_idintercambio = models.ForeignKey(Intercambio, on_delete = models.CASCADE ,default="1")
 
 class Comentario(models.Model):
     id_comentario = models.AutoField(primary_key=True, unique=True, editable=False)
     Comentario = models.CharField(max_length=750)
     fecha= models.DateTimeField()
     hora = models.TimeField()
-    Alumno_idalumno = models.ForeignKey(Alumno, on_delete = models.CASCADE,default=0)
+    Alumno_idalumno = models.ForeignKey(Alumno, on_delete = models.CASCADE,default="1")
 #--------------------------------------------
 class Publicacion(models.Model):
     id_publicacion = models.AutoField(primary_key=True, unique=True, editable=False)
@@ -50,11 +50,11 @@ class Publicacion(models.Model):
     fecha= models.DateTimeField()
     hora = models.TimeField()
     vistas = models.IntegerField()
-    Alumno_idAlumno = models.ForeignKey(Alumno,on_delete = models.CASCADE,default=0)
+    Alumno_idAlumno = models.ForeignKey(Alumno,on_delete = models.CASCADE,default="1")
 
 class Multimedia(models.Model):
     id_multimedia = models.AutoField(primary_key=True, unique=True, editable=False)
     url = models.CharField(max_length=150)
     tipo= models.CharField(max_length=45)
-    Publicacion_idPublicacion = models.ForeignKey(Publicacion,on_delete = models.CASCADE,default=0)
+    Publicacion_idPublicacion = models.ForeignKey(Publicacion,on_delete = models.CASCADE,default="1")
 
