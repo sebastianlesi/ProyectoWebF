@@ -1,0 +1,27 @@
+from behave import *
+import operator
+from functools import reduce
+from django.db.models import Q
+
+use_step_matcher("parse")
+
+@when(u'I register publication')
+def step_impl(context):
+    for row in context.table:
+        context.browser.visit(context.get_url('era:era_create'))
+        form = context.browser.find_by_tag('form').first
+        for heading in row.headings:
+            context.browser.fill(heading, row[heading])
+        form.find_by_value('Submit').first.click()
+
+@then(u'Im viewing the details page for publication by "{user}"')
+def step_impl(context, user):
+    q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
+    from era.models import Publicacion
+    publicacion = Publicacion.objects.filter(reduce(operator.and_, q_list)).get()
+    assert context.browser.url == context.get_url(publicacion)
+
+@then(u'There are {count:n} publications')
+def step_impl(context, count):
+    from era.models import Publicacion
+    assert count == Publicacion.objects.count()
