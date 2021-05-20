@@ -1,4 +1,4 @@
-rom django.urls import path
+from django.urls import path
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 from era.models import Publicacion, Comentario
@@ -29,7 +29,6 @@ urlpatterns = [
             model=Comentario,
             template_name='era/form2.html',
             form_class=ComentarioForm),
-        ),
         name='comentario_create'),
 
     # Edit restaurant dish details, ex.: /myrestaurants/restaurants/1/dishes/1/edit/
