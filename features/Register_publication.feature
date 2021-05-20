@@ -14,4 +14,4 @@ I want to register a publication together with its text and multimedia.
         Then I'm viewing the details page for publication by "user"
             | titulo        | Descripcion    | Vistas    |
             | The Tavern    | ingenieria     | 0         |
-        And There are 1 publication
+        And There are 1 publications

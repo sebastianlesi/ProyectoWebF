@@ -14,4 +14,4 @@ I want to register a comment in the corresponding publication together with its 
     Then I'm viewing the details page for comment at publication "The Tavern" by "user"
       | comentario      |
       | bueno           |
-    And There are 1 comment
+    And There are 1 comments
