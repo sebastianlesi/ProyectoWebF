@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.contrib.auth import views
 
 urlpatterns = [
+    path('era/', include('era.urls', namespace='era')),
     path('admin/', admin.site.urls),
     path('', views.LoginView.as_view(), name='loginPage'),
 ]
