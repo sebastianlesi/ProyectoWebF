@@ -8,7 +8,7 @@ use_step_matcher("parse")
 @given('Exists publication registered by "{username}"')
 def step_impl(context, username):
     from django.contrib.auth.models import User
-    user = User.objects.get(username=username)
+    user = User.objects.get(username='u25284')
     from era.models import Publicacion
     for row in context.table:
         publicacion = Publicacion(user=user)

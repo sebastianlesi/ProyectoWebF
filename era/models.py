@@ -61,7 +61,5 @@ class Multimedia(models.Model):
 
     def get_absolute_url(self) :
         return reverse('era:publicacion_detail', kwargs={'pk': self.pk})
-    
-    def get_absolute_url(self) :
-        return reverse('era:comentario_detail', kwargs={'pk': self.pk})
+
         

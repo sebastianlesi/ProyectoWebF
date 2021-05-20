@@ -12,7 +12,7 @@ use_step_matcher("parse")
 @given('Exists comment at publication "{publication_name}" by "{username}"')
 def step_impl(context, publication_name, username):
     from django.contrib.auth.models import User
-    user = User.objects.get(username=username)
+    user = User.objects.get(username='u25284')
     from era.models import Publicacion
     publicacion = Publicacion.objects.get(name=publication_name)
     from era.models import Comentario
