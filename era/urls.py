@@ -27,7 +27,12 @@ urlpatterns = [
             template_name='era/publicacion_detail.html'),
         name='publicacion_detail'),
 
-
+    # Edit publication details, ex.: /era/publications/1/edit/
+    path('publications/<int:pk>/edit',
+        CreateView.as_view(
+            model=Publicacion,
+            form_class=PublicacionForm),
+        name='publication_edit'),
 
 
     ##  -----------------Comments-----------------------------------
@@ -45,4 +50,11 @@ urlpatterns = [
             model=Comentario,
             template_name='era/comentario_detail.html'),
         name='comentario_detail'),
+
+    # Edit publication comment details, ex.: /era/publications/1/comments/1/edit/
+    path('publications/<int:pkr>/comments/<int:pk>/edit',
+        CreateView.as_view(
+            model=Comentario,
+            form_class=ComentarioForm),
+        name='comment_edit'),
 ]

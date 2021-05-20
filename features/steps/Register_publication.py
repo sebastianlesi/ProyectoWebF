@@ -38,3 +38,15 @@ def step_impl(context, user):
 def step_impl(context, count):
     from era.models import Publicacion
     assert count == Publicacion.objects.count()
+
+@when('I edit the publication with name "{name}"')
+def step_impl(context, name):
+    from era.models import Publicacion
+    publication = Publicacion.objects.get(name=name)
+    context.browser.visit(context.get_url('era:publication_edit', publication.pk))
+    if context.browser.url == context.get_url('era:publication_edit', publication.pk)\
+            and context.browser.find_by_tag('form'):
+        form = context.browser.find_by_tag('form').first
+        for heading in context.table.headings:
+            context.browser.fill(heading, context.table[0][heading])
+        form.find_by_value('Submit').first.click()

@@ -43,6 +43,7 @@ def step_impl(context, publication_name, username):
     q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
     from django.contrib.auth.models import User
     q_list.append(Q(('user', User.objects.get(username=username))))
+
     from era.models import Publicacion
     q_list.append(Q(('publicacion', Publicacion.objects.get(name=publication_name))))
     from era.models import Comentario
@@ -55,3 +56,15 @@ def step_impl(context, publication_name, username):
 def step_impl(context, count):
     from era.models import Comentario
     assert count == Comentario.objects.count()
+
+@when('I edit the comment at publication with the name "{name}"')
+def step_impl(context, name):
+    from era.models import Publicacion
+    publication = Publicacion.objects.get(name=name)
+    context.browser.visit(context.get_url('era:comment_edit', publication.pk))
+    if context.browser.url == context.get_url('era:comment_edit', publication.pk)\
+            and context.browser.find_by_tag('form'):
+        form = context.browser.find_by_tag('form').first
+        for heading in context.table.headings:
+            context.browser.fill(heading, context.table[0][heading])
+        form.find_by_value('Submit').first.click()
