@@ -1,5 +1,5 @@
 Feature: Edit Publication
-In order to keep track of the changes I do,
+In order to keep updated my previous registers about publications
 As a user,
 I want to edit a publication register I created.
 
@@ -7,14 +7,14 @@ Background: There are registered users and a publication by one of them
     Given Exists a user "user1" with password "password"
     And Exists a user "user2" with password "password"
     And Exists publication registered by "user1"
-      | titulo        | descripcion    | vistas    |
-      | The Tavern    | ingenieria     | 0         |
+      | titulo                 | descripcion    | vistas    |
+      | Movilidad en España    | ingenieria     | 0         |
 
-  Scenario: Edit owned publication registry vistas
+  Scenario: Edit owned publication registry descripcion
     Given I login as user "user1" with password "password"
-    When I edit the publication with name "The Tavern"
-      | vistas    |
-      | 1         |
+    When I edit the publication with name "Movilidad en España"
+      | descripcion    |
+      | ingenieria         |
     Then I'm viewing the details page for publication by "user1"
       | titulo        | descripcion    | vistas    |
       | The Tavern    | ingenieria     | 1         |

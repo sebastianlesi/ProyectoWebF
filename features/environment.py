@@ -1,4 +1,4 @@
-import django
+
 from behave.runner import Context
 from splinter.browser import Browser
 

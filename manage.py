@@ -3,6 +3,11 @@
 import os
 import sys
 
+import os,django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eracom.settings')
+
+django.setup()
 
 def main():
     """Run administrative tasks."""

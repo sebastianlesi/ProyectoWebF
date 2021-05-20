@@ -1,40 +1,48 @@
 from django.urls import path
 from django.utils import timezone
-from django.views.generic import DetailView, ListView
-from era.models import Publicacion, Comentario
+from django.views.generic import DetailView, ListView, CreateView
+
 from era.forms import PublicacionForm, ComentarioForm
-from era.views import RestaurantCreate, DishCreate, RestaurantDetail, review, LoginRequiredCheckIsOwnerUpdateView
+from era.models import Publicacion, Comentario
+#from era.views import RestaurantCreate, DishCreate, RestaurantDetail, review, LoginRequiredCheckIsOwnerUpdateView
 
 app_name = "era"
 
 urlpatterns = [
-    # List latest 5 restaurants: /myrestaurants/
+
+
+    ##  -----------------Publications-----------------------------------
+    #Registrar un pubblicacion, de: /era/Create
     path('publicacion/create',
-        PublicacionCreate.as_view(
+        CreateView.as_view(
             model=Publicacion,
             template_name='era/form.html',
             form_class=PublicacionForm),
         name='publicacion_create'),
-
-    # Edit restaurant details, ex.: /myrestaurants/restaurants/1/edit/
-    path('publicacion/<int:pk>/edit',
-        LoginRequiredCheckIsOwnerUpdateView.as_view(
+    
+    #Publicacion details, /myrestaurants/1
+    path('publicaciones/<int:pk>',
+        DetailView.as_view(
             model=Publicacion,
-            form_class=PublicacionForm),
-        name='publicacion_edit'),
+            template_name='era/publicacion_detail.html'),
+        name='publicacion_detail'),
 
-    # Create a restaurant dish, ex.: /myrestaurants/restaurants/1/dishes/create/
-    path('publicacion/<int:pk>/comentario/create',
-        ComentarioCreate.as_view(
-            model=Comentario,
-            template_name='era/form2.html',
-            form_class=ComentarioForm),
-        name='comentario_create'),
 
-    # Edit restaurant dish details, ex.: /myrestaurants/restaurants/1/dishes/1/edit/
-    path('publicacion/<int:pkr>/comentario/<int:pk>/edit',
-        LoginRequiredCheckIsOwnerUpdateView.as_view(
+
+
+    ##  -----------------Comments-----------------------------------
+     # Create a publication comment, ex.: /era/publicaciones/1/comments/create/
+    path('publicaciones/<int:pk>/comment/create',
+        CreateView.as_view(
             model=Comentario,
+            template_name='era/form.html',
             form_class=ComentarioForm),
-        name='comentario_edit'),
+        name='comment_create'),
+
+    # Publication comment details, ex: /era/Publication/1/comments/1/
+    path('publications/<int:pkr>/comments/<int:pk>',
+        CreateView.as_view(
+            model=Comentario,
+            template_name='era/comentario_detail.html'),
+        name='comentario_detail'),
 ]

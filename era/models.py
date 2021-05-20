@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls.base import reverse
 
 # Create your models here.
 class Facultad(models.Model):
@@ -58,3 +59,9 @@ class Multimedia(models.Model):
     tipo= models.CharField(max_length=45)
     Publicacion_idPublicacion = models.ForeignKey(Publicacion,on_delete = models.CASCADE,default="1")
 
+    def get_absolute_url(self) :
+        return reverse('era:publicacion_detail', kwargs={'pk': self.pk})
+    
+    def get_absolute_url(self) :
+        return reverse('era:comentario_detail', kwargs={'pk': self.pk})
+        

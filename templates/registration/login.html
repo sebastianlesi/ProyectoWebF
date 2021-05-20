@@ -2,7 +2,7 @@
     <h2>You are Login</h2>
 {% else %}
     <h2>Login</h2>
-    <form method="post" action="{% url 'loginPage' %}">
+    <form method="post" action="{% url 'login' %}">
         <table>
             <tr>
                 <td>{{ form.username.label_tag }}</td>
@@ -13,7 +13,7 @@
                 <td>{{ form.password }}</td>
             </tr>
             <tr>
-                <td><input type="hidden" name="next" value="{% url 'loginPage' %}"/></td>
+                <td><input type="hidden" name="next" value="{% url 'login' %}"/></td>
             </tr>
         </table>
         <input type="submit" value="login" />
