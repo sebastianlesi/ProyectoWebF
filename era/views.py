@@ -13,6 +13,7 @@ from era.forms import PublicacionForm, ComentarioForm
 # Security Mixins
 
 class LoginRequiredMixin(object):
+    @method_decorator(login_required())
     def dispatch(self, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
@@ -68,3 +69,8 @@ class CommentDetail(DetailView):
         context = super(CommentDetail, self).get_context_data(**kwargs)
         #context['RATING_CHOICES'] = RestaurantReview.RATING_CHOICES
         return context
+
+@login_required()
+def review(request, pk):
+    publicacion = get_object_or_404(Publicacion, pk=pk)
+    return HttpResponseRedirect(reverse('myrestaurants:restaurant_detail', args=(publicacion.id,)))

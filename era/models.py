@@ -48,7 +48,7 @@ class Comentario(models.Model):
         return u"%s" % self.name
 
     def get_absolute_url(self) :
-        return reverse('era:comentario_detail', kwargs={'pkr': self.publication.pk, 'pk':self.pk})
+        return reverse('era:comment_detail', kwargs={'pkr': self.publicacion.pk, 'pk':self.pk})
 
 #--------------------------------------------
 class Publicacion(models.Model):
@@ -71,6 +71,13 @@ class Multimedia(models.Model):
     url = models.CharField(max_length=150)
     tipo= models.CharField(max_length=45)
     Publicacion_idPublicacion = models.ForeignKey(Publicacion,on_delete = models.CASCADE,default="1")
+
+class Meta:
+        abstract = True
+
+
+class Meta:
+        unique_together = ("publicacion", "user")
 
     
 

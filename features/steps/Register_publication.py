@@ -29,7 +29,7 @@ def step_impl(context):
 def step_impl(context, user):
     q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
     from django.contrib.auth.models import User
-    q_list.append(Q(('user', User.objects.get(user=user))))
+    q_list.append(Q(('username', User.objects.get(user=user))))
     from era.models import Publicacion
     publicacion = Publicacion.objects.filter(reduce(operator.and_, q_list)).get()
     assert context.browser.url == context.get_url(publicacion)
@@ -43,8 +43,8 @@ def step_impl(context, count):
 def step_impl(context, name):
     from era.models import Publicacion
     publication = Publicacion.objects.get(name=name)
-    context.browser.visit(context.get_url('era:publicacion_edit', publication.pk))
-    if context.browser.url == context.get_url('era:publicacion_edit', publication.pk)\
+    context.browser.visit(context.get_url('era:publication_edit', publication.pk))
+    if context.browser.url == context.get_url('era:publication_edit', publication.pk)\
             and context.browser.find_by_tag('form'):
         form = context.browser.find_by_tag('form').first
         for heading in context.table.headings:
