@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls.base import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Facultad(models.Model):
@@ -55,10 +56,11 @@ class Publicacion(models.Model):
     id_publicacion = models.AutoField(primary_key=True, unique=True, editable=False)
     titulo = models.CharField(max_length=120)
     descripcion = models.CharField(max_length=920)
-    fecha= models.DateTimeField()
-    hora = models.TimeField()
-    vistas = models.IntegerField()
+    fecha= models.IntegerField(default="1")
+    hora = models.IntegerField(default="1")
+    vistas = models.IntegerField(default="1")
     Alumno_idAlumno = models.ForeignKey(Alumno,on_delete = models.CASCADE,default="1")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="1", null=True)
 
     def __unicode__(self):
         return u"%s" % self.name
