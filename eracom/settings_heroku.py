@@ -6,6 +6,9 @@ import django_heroku
 DEBUG = False
 
 ALLOWED_HOSTS = ['eracom.herokuapp.com']
-
+MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware']
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

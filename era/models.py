@@ -43,6 +43,8 @@ class Comentario(models.Model):
     fecha= models.DateTimeField()
     hora = models.TimeField()
     Alumno_idalumno = models.ForeignKey(Alumno, on_delete = models.CASCADE,default="1")
+    def get_absolute_url(self) :
+        return reverse('era:comentario_detail', kwargs={'pk': self.pk})
 #--------------------------------------------
 class Publicacion(models.Model):
     id_publicacion = models.AutoField(primary_key=True, unique=True, editable=False)
@@ -53,13 +55,17 @@ class Publicacion(models.Model):
     vistas = models.IntegerField()
     Alumno_idAlumno = models.ForeignKey(Alumno,on_delete = models.CASCADE,default="1")
 
+    def get_absolute_url(self) :
+        return reverse('era:publicacion_detail', kwargs={'pk': self.pk})
+
 class Multimedia(models.Model):
     id_multimedia = models.AutoField(primary_key=True, unique=True, editable=False)
     url = models.CharField(max_length=150)
     tipo= models.CharField(max_length=45)
     Publicacion_idPublicacion = models.ForeignKey(Publicacion,on_delete = models.CASCADE,default="1")
 
-    def get_absolute_url(self) :
-        return reverse('era:publicacion_detail', kwargs={'pk': self.pk})
+    
+
+
 
         

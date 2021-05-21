@@ -14,12 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from era import views
 from django.contrib.auth import views
 from django.urls import path, include
+from django.views.generic import RedirectView
+
+from django.conf import settings
+from django.views.static import serve
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('era/', include('era.urls', namespace='era')),  
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT, })
 ]

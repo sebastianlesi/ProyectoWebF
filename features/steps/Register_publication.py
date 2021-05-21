@@ -5,10 +5,10 @@ from django.db.models import Q
 
 use_step_matcher("parse")
 
-@given('Exists publication registered by "{username}"')
+@given(u'Exists publication registered by "{username}"')
 def step_impl(context, username):
     from django.contrib.auth.models import User
-    user = User.objects.get(username='u25284')
+    user = User.objects.get(username=username)
     from era.models import Publicacion
     for row in context.table:
         publicacion = Publicacion(user=user)
@@ -39,7 +39,7 @@ def step_impl(context, count):
     from era.models import Publicacion
     assert count == Publicacion.objects.count()
 
-@when('I edit the publication with name "{name}"')
+@when(u'I edit the publication with name "{name}"')
 def step_impl(context, name):
     from era.models import Publicacion
     publication = Publicacion.objects.get(name=name)

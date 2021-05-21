@@ -21,14 +21,14 @@ urlpatterns = [
         name='publicacion_create'),
     
     #Publicacion details, /myrestaurants/1
-    path('publicaciones/<int:pk>',
+    path('publicacion/<int:pk>',
         DetailView.as_view(
             model=Publicacion,
             template_name='era/publicacion_detail.html'),
         name='publicacion_detail'),
 
     # Edit publication details, ex.: /era/publications/1/edit/
-    path('publications/<int:pk>/edit',
+    path('publicacion/<int:pk>/edit',
         CreateView.as_view(
             model=Publicacion,
             form_class=PublicacionForm),
@@ -37,7 +37,7 @@ urlpatterns = [
 
     ##  -----------------Comments-----------------------------------
      # Create a publication comment, ex.: /era/publicaciones/1/comments/create/
-    path('publicaciones/<int:pk>/comment/create',
+    path('publicacion/<int:pk>/comment/create',
         CreateView.as_view(
             model=Comentario,
             template_name='era/form.html',
@@ -45,14 +45,14 @@ urlpatterns = [
         name='comment_create'),
 
     # Publication comment details, ex: /era/Publication/1/comments/1/
-    path('publications/<int:pkr>/comments/<int:pk>',
+    path('publicacion/<int:pkr>/comment/<int:pk>',
         CreateView.as_view(
             model=Comentario,
             template_name='era/comentario_detail.html'),
         name='comentario_detail'),
 
     # Edit publication comment details, ex.: /era/publications/1/comments/1/edit/
-    path('publications/<int:pkr>/comments/<int:pk>/edit',
+    path('publicacion/<int:pkr>/comment/<int:pk>/edit',
         CreateView.as_view(
             model=Comentario,
             form_class=ComentarioForm),
