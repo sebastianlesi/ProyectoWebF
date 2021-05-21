@@ -26,7 +26,7 @@ from django.views.static import serve
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('era/', include('era.urls', namespace='era')),  
-    path('accounts/login/', views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
+    path('', views.LoginView.as_view(), name='login'),
+    path('', views.LogoutView.as_view(), name='logout'),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT, })
 ]

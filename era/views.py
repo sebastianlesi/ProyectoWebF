@@ -42,7 +42,7 @@ class PublicacionCreate(LoginRequiredMixin, CreateView):
 
 class PublicacionDetail(DetailView):
     model = Publicacion
-    template_name = 'era/publicacion_detail.html'
+    template_name = 'registration/publicacion_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(PublicacionDetail, self).get_context_data(**kwargs)
@@ -63,7 +63,7 @@ class CommentCreate(LoginRequiredMixin, CreateView):
 
 class CommentDetail(DetailView):
     model = Comentario
-    template_name = 'era/comentario_detail.html'
+    template_name = 'registration/comentario_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(CommentDetail, self).get_context_data(**kwargs)

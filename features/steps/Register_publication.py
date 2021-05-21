@@ -29,7 +29,7 @@ def step_impl(context):
 def step_impl(context, user):
     q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
     from django.contrib.auth.models import User
-    q_list.append(Q(('username', User.objects.get(user=user))))
+    q_list.append(Q(('user', User.objects.get(user=user))))
     from era.models import Publicacion
     publicacion = Publicacion.objects.filter(reduce(operator.and_, q_list)).get()
     assert context.browser.url == context.get_url(publicacion)

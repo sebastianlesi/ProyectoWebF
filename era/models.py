@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls.base import reverse
 from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
 class Facultad(models.Model):
@@ -35,15 +36,15 @@ class Alumno(models.Model):
     clave = models.CharField(max_length=35)
     fecha_nac= models.DateTimeField()
     Genero = models.CharField(max_length=20)
-    Carrera_idCarrera = models.ForeignKey(Carrera, on_delete = models.CASCADE ,default="1")
-    Intercambio_idintercambio = models.ForeignKey(Intercambio, on_delete = models.CASCADE ,default="1")
+    Carrera_idCarrera = models.ForeignKey(Carrera,related_name='carreras', on_delete = models.CASCADE)
+    Intercambio_idintercambio = models.ForeignKey(Intercambio,related_name='intercambios', on_delete = models.CASCADE )
 
 class Comentario(models.Model):
     id_comentario = models.AutoField(primary_key=True, unique=True, editable=False)
     Comentario = models.CharField(max_length=750)
     fecha= models.DateTimeField()
     hora = models.TimeField()
-    Alumno_idalumno = models.ForeignKey(Alumno, on_delete = models.CASCADE,default="1")
+    Alumno_idalumno = models.ForeignKey(Alumno, related_name='alumnos',related_query_name="alumno",on_delete = models.CASCADE,default="1")
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -55,12 +56,11 @@ class Comentario(models.Model):
 class Publicacion(models.Model):
     id_publicacion = models.AutoField(primary_key=True, unique=True, editable=False)
     titulo = models.CharField(max_length=120)
-    descripcion = models.CharField(max_length=920)
-    fecha= models.IntegerField(default="1")
-    hora = models.IntegerField(default="1")
+    descripcion = models.CharField(max_length=920, null = False)
+    fecha= models.DateField(default=date.today)
     vistas = models.IntegerField(default="1")
-    Alumno_idAlumno = models.ForeignKey(Alumno,on_delete = models.CASCADE,default="1")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default="1", null=True)
+    Alumno_idAlumno = models.ForeignKey(Alumno,null=True, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="1")
 
     def __unicode__(self):
         return u"%s" % self.name
