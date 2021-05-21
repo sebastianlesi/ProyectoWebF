@@ -73,4 +73,4 @@ class CommentDetail(DetailView):
 @login_required()
 def review(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
-    return HttpResponseRedirect(reverse('myrestaurants:restaurant_detail', args=(publicacion.id,)))
+    return HttpResponseRedirect(reverse('era:restaurant_detail', args=(publicacion.id,)))
