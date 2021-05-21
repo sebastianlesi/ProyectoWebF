@@ -43,8 +43,13 @@ class Comentario(models.Model):
     fecha= models.DateTimeField()
     hora = models.TimeField()
     Alumno_idalumno = models.ForeignKey(Alumno, on_delete = models.CASCADE,default="1")
+
+    def __unicode__(self):
+        return u"%s" % self.name
+
     def get_absolute_url(self) :
-        return reverse('era:comentario_detail', kwargs={'pk': self.pk})
+        return reverse('era:comentario_detail', kwargs={'pkr': self.publication.pk, 'pk':self.pk})
+
 #--------------------------------------------
 class Publicacion(models.Model):
     id_publicacion = models.AutoField(primary_key=True, unique=True, editable=False)
@@ -54,6 +59,9 @@ class Publicacion(models.Model):
     hora = models.TimeField()
     vistas = models.IntegerField()
     Alumno_idAlumno = models.ForeignKey(Alumno,on_delete = models.CASCADE,default="1")
+
+    def __unicode__(self):
+        return u"%s" % self.name
 
     def get_absolute_url(self) :
         return reverse('era:publicacion_detail', kwargs={'pk': self.pk})
