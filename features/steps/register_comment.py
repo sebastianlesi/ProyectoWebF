@@ -42,7 +42,7 @@ def step_impl(context, publication_name):
 def step_impl(context, publication_name, username):
     q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
     from django.contrib.auth.models import User
-    q_list.append(Q(('user', User.objects.get(username=username))))
+    q_list.append(Q(('username', User.objects.get(username=username))))
 
     from era.models import Publicacion
     q_list.append(Q(('publicacion', Publicacion.objects.get(name=publication_name))))

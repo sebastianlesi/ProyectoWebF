@@ -16,7 +16,7 @@ urlpatterns = [
     path('publicacion/create',
         PublicacionCreate.as_view(
             model=Publicacion,
-            template_name='era/form.html',
+            template_name='registration/form.html',
             form_class=PublicacionForm),
         name='publicacion_create'),
     
@@ -40,7 +40,7 @@ urlpatterns = [
     path('publicacion/<int:pk>/comment/create',
         CommentCreate.as_view(
             model=Comentario,
-            template_name='era/form.html',
+            template_name='registration/form.html',
             form_class=ComentarioForm),
         name='comment_create'),
 
