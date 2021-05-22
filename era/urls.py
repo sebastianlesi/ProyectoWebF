@@ -16,7 +16,7 @@ urlpatterns = [
     path('publicacion/create',
         PublicacionCreate.as_view(
             model=Publicacion,
-            template_name='registration/form.html',
+            template_name='era/form.html',
             form_class=PublicacionForm),
         name='publicacion_create'),
     
@@ -24,7 +24,7 @@ urlpatterns = [
     path('publicacion/<int:pk>',
         PublicacionDetail.as_view(
             model=Publicacion,
-            template_name='registration/publicacion_detail.html'),
+            template_name='era/publicacion_detail.html'),
         name='publicacion_detail'),
 
     # Edit publication details, ex.: /era/publications/1/edit/
@@ -40,7 +40,7 @@ urlpatterns = [
     path('publicacion/<int:pk>/comment/create',
         CommentCreate.as_view(
             model=Comentario,
-            template_name='registration/form.html',
+            template_name='era/form.html',
             form_class=ComentarioForm),
         name='comment_create'),
 
@@ -48,7 +48,7 @@ urlpatterns = [
     path('publicacion/<int:pkr>/comment/<int:pk>',
         CommentDetail.as_view(
             model=Comentario,
-            template_name='registration/comentario_detail.html'),
+            template_name='era/comentario_detail.html'),
         name='comentario_detail'),
 
     # Edit publication comment details, ex.: /era/publications/1/comments/1/edit/

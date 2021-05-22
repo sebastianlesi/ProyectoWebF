@@ -25,14 +25,14 @@ class CheckIsOwnerMixin(object):
         return obj
 
 class LoginRequiredCheckIsOwnerUpdateView(LoginRequiredMixin, CheckIsOwnerMixin, UpdateView):
-    template_name = 'registration/form.html'
+    template_name = 'era/form.html'
 
 # HTML Views
 
 #-------------------------Publicacion----------------------------
 class PublicacionCreate(LoginRequiredMixin, CreateView):
     model = Publicacion
-    template_name = 'registration/form.html'
+    template_name = 'era/'
     form_class = PublicacionForm
 
     def form_valid(self, form):
@@ -42,7 +42,7 @@ class PublicacionCreate(LoginRequiredMixin, CreateView):
 
 class PublicacionDetail(DetailView):
     model = Publicacion
-    template_name = 'registration/publicacion_detail.html'
+    template_name = 'era/publicacion_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(PublicacionDetail, self).get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class PublicacionDetail(DetailView):
 #-------------------------Comentario----------------------------
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comentario
-    template_name = 'registration/form.html'
+    template_name = 'era/form.html'
     form_class = ComentarioForm
 
     def form_valid(self, form):

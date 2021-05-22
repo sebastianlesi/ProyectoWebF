@@ -80,8 +80,8 @@ class Meta:
         abstract = True
 
 
-class Meta:
-        unique_together = ("publicacion", "user")
+#class Meta:
+ #       unique_together = ("publicacion", "user")
 
     
 
