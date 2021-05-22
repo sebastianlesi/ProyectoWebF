@@ -14,7 +14,7 @@ def step_impl(context, publication_name, username):
     from django.contrib.auth.models import User
     user = User.objects.get(username=username)
     from era.models import Publicacion
-    publicacion = Publicacion.objects.get(name=publication_name)
+    publicacion = Publicacion.objects.get(titulo=publication_name)
     from era.models import Comentario
     for row in context.table:
         comment = Comentario(publicacion=publicacion, user=user)
@@ -25,7 +25,7 @@ def step_impl(context, publication_name, username):
 @when('I register comment at pubication "{publication_name}"')
 def step_impl(context, publication_name):
     from era.models import Publicacion
-    publicacion = Publicacion.objects.get(name=publication_name)
+    publicacion = Publicacion.objects.get(titulo=publication_name)
     for row in context.table:
         context.browser.visit(context.get_url('era:comment_create', publicacion.pk))
         if context.browser.url == context.get_url('era:comment_create', publicacion.pk):
@@ -42,10 +42,9 @@ def step_impl(context, publication_name):
 def step_impl(context, publication_name, username):
     q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
     from django.contrib.auth.models import User
-    q_list.append(Q(('username', User.objects.get(username=username))))
-
+    q_list.append(Q(('user', User.objects.get(username=username))))
     from era.models import Publicacion
-    q_list.append(Q(('publicacion', Publicacion.objects.get(name=publication_name))))
+    q_list.append(Q(('publicacion', Publicacion.objects.get(titulo=publication_name))))
     from era.models import Comentario
     comment = Comentario.objects.filter(reduce(operator.and_, q_list)).get()
     assert context.browser.url == context.get_url(comment)
@@ -60,7 +59,7 @@ def step_impl(context, count):
 @when('I edit the comment at publication with the name "{name}"')
 def step_impl(context, name):
     from era.models import Publicacion
-    publication = Publicacion.objects.get(name=name)
+    publication = Publicacion.objects.get(titulo=name)
     context.browser.visit(context.get_url('era:comment_edit', publication.pk))
     if context.browser.url == context.get_url('era:comment_edit', publication.pk)\
             and context.browser.find_by_tag('form'):

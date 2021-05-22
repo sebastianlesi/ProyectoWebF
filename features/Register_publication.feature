@@ -9,7 +9,7 @@ I want to register a publication together with its text and multimedia.
     Scenario: Register just publication name
         Given I login as user "user" with password "password"
         When I register publication
-            | titulo        | Descripcion    | Vistas    |
+            | titulo                | Descripcion    | Vistas    |
             | Movilidad en España   | ingenieria     | 0         |
         Then I'm viewing the details page for publication by "user"
             | titulo        | Descripcion    | Vistas    |

@@ -11,7 +11,7 @@ def step_impl(context, username):
     user = User.objects.get(username=username)
     from era.models import Publicacion
     for row in context.table:
-        publicacion = Publicacion(user=user)
+        publicacion = Publicacion(user=user) #Revisar register de profe
         for heading in row.headings:
             setattr(publicacion, heading, row[heading])
         publicacion.save()
@@ -29,7 +29,7 @@ def step_impl(context):
 def step_impl(context, user):
     q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
     from django.contrib.auth.models import User
-    q_list.append(Q(('user', User.objects.get(user=user))))
+    q_list.append(Q(('user', User.objects.get(username=user))))
     from era.models import Publicacion
     publicacion = Publicacion.objects.filter(reduce(operator.and_, q_list)).get()
     assert context.browser.url == context.get_url(publicacion)
@@ -42,7 +42,7 @@ def step_impl(context, count):
 @when(u'I edit the publication with name "{name}"')
 def step_impl(context, name):
     from era.models import Publicacion
-    publication = Publicacion.objects.get(name=name)
+    publication = Publicacion.objects.get(titulo=name)
     context.browser.visit(context.get_url('era:publication_edit', publication.pk))
     if context.browser.url == context.get_url('era:publication_edit', publication.pk)\
             and context.browser.find_by_tag('form'):
