@@ -1,9 +1,9 @@
 FROM python:latest
 ENV PYTHONUNBUFFERED=1
-RUN mkdir /app
-WORKDIR /app
-ADD requirements.txt /app/
+RUN mkdir /era
+WORKDIR /era
+ADD requirements.txt /era/
 RUN pip install -r requirements.txt
-ADD . /app/
+ADD . /era/
 
 
