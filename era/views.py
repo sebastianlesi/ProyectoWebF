@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -74,3 +75,6 @@ class CommentDetail(DetailView):
 def review(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
     return HttpResponseRedirect(reverse('era:restaurant_detail', args=(publicacion.id,)))
+
+class ObjectDoesNotExist(Exception):
+    silent_variable_failure = True

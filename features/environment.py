@@ -10,12 +10,20 @@ from splinter.browser import Browser
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "eracom.settings"
 
+def before_all(context):
+    context.browser = Browser('chrome', headless=True)
 
+def after_all(context):
+    context.browser.quit()
+    context.browser = None
 
+  
+
+"""
 def before_all(context):
     django.setup()
-    #context.test_runner = DiscoverRunner()
-    #context.test_runner.setup_test_environment()
+    context.test_runner = DiscoverRunner()
+    context.test_runner.setup_test_environment()
     context.browser = Browser('chrome', headless=True)  
 
 
@@ -24,19 +32,6 @@ def after_all(context):
     context.browser.quit()
     context.browser = None
 
-
-
-"""
-def before_all(context):
-    context.browser = Browser('chrome', headless=True)
-
-def after_all(context):
-    context.browser.quit()
-    context.browser = None
-"""
-  
-
-"""
 class ExtendedContext(Context):
     def get_url(self, to=None, *args, **kwargs):
         return self.test.live_server_url + (
