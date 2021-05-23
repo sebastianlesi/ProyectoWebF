@@ -68,7 +68,6 @@ class CommentDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CommentDetail, self).get_context_data(**kwargs)
-        #context['RATING_CHOICES'] = RestaurantReview.RATING_CHOICES
         return context
 
 @login_required()

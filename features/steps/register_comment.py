@@ -9,15 +9,13 @@ from eracom.settings import BASE_DIR
 
 use_step_matcher("parse")
 
-@given('Exists comment at publication "{publication_name}" by "{username}"')
-def step_impl(context, publication_name, username):
-    from django.contrib.auth.models import User
-    user = User.objects.get(username=username)
+@given('Exists comment at publication "{publication_name}"')
+def step_impl(context, publication_name):
     from era.models import Publicacion
     publicacion = Publicacion.objects.get(titulo=publication_name)
     from era.models import Comentario
     for row in context.table:
-        comment = Comentario(publicacion=publicacion, user=user)
+        comment = Comentario(publicacion=publicacion)
         for heading in row.headings:
             setattr(comment, heading, row[heading])
         comment.save()
@@ -27,8 +25,8 @@ def step_impl(context, publication_name):
     from era.models import Publicacion
     publicacion = Publicacion.objects.get(titulo=publication_name)
     for row in context.table:
-        context.browser.visit(context.get_url('era:comment_create', publicacion.pk))
-        if context.browser.url == context.get_url('era:comment_create', publicacion.pk):
+        context.browser.visit(context.get_url('era:comment_create', publicacion_name))
+        if context.browser.url == context.get_url('era:comment_create', publicacion_name):
             form = context.browser.find_by_tag('form').first
             for heading in row.headings:
                 if heading == 'image':
@@ -38,30 +36,23 @@ def step_impl(context, publication_name):
                     context.browser.fill(heading, row[heading])
             form.find_by_value('Submit').first.click()
 
-@then('I\'m viewing the details page for comment at publication "{publication_name}" by "{username}"')
-def step_impl(context, publication_name, username):
-    q_list = [Q((attribute, context.table.rows[0][attribute])) for attribute in context.table.headings]
-    from django.contrib.auth.models import User
-    q_list.append(Q(('user', User.objects.get(username=username))))
-    from era.models import Publicacion
-    q_list.append(Q(('publicacion', Publicacion.objects.get(titulo=publication_name))))
-    from era.models import Comentario
-    comment = Comentario.objects.filter(reduce(operator.and_, q_list)).get()
-    assert context.browser.url == context.get_url(comment)
-    if comment.image:
-        comment.image.delete()
+@then('I\'m viewing the details page for comment at publication "{publication_name}"')
+def step_impl(context, publication_name):
+    from era.models import Comentario, Publicacion
+    comentario = Comentario.objects.get(Publicacion.objects.get(titulo=publication_name))
+    context.browser.visit(context.get_url(publicacion))
 
 @then('There are {count:n} comments')
 def step_impl(context, count):
     from era.models import Comentario
     assert count == Comentario.objects.count()
 
-@when('I edit the comment at publication with the name "{name}"')
+@when('I edit the comment at publication with the id_comentario "{name}"')
 def step_impl(context, name):
-    from era.models import Publicacion
-    publication = Publicacion.objects.get(titulo=name)
-    context.browser.visit(context.get_url('era:comment_edit', publication.pk))
-    if context.browser.url == context.get_url('era:comment_edit', publication.pk)\
+    from era.models import Comentario
+    comentario = Comentario.objects.get(id_comentario=name)
+    context.browser.visit(context.get_url('era:comment_edit', comentario.pk, name))
+    if context.browser.url == context.get_url('era:comment_edit', comentario.pk, name)\
             and context.browser.find_by_tag('form'):
         form = context.browser.find_by_tag('form').first
         for heading in context.table.headings:

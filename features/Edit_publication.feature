@@ -15,17 +15,7 @@ Background: There are registered users and a publication by one of them
     When I edit the publication with name "Movilidad en España"
       | descripcion          |
       | licenciatura         |
-    Then I'm viewing the details page for publication by "user1"
+    Then I'm viewing the details page for publication with name "Movilidad en España"
       | titulo                 | descripcion      | vistas    |
       | Movilidad en España    | licenciatura     | 0         |
-    And There are 1 publications
-
-    Scenario: Edit owned publication registry titulo
-    Given I login as user "user1" with password "password"
-    When I edit the publication with name "Movilidad en España"
-      | titulo                                     |
-      | Movilidad en Universidad de Lleida         |
-    Then I'm viewing the details page for publication by "user1"
-      | titulo                               | descripcion      | vistas    |
-      | Movilidad en Universidad de Lleida   | ingenieria       | 0         |
     And There are 1 publications

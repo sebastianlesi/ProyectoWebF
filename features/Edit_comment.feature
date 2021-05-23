@@ -8,17 +8,13 @@ Background: There are registered users and a comment by one of them
     And Exists publication registered by "user1"
       | titulo                   |
       | Movilidad en España      |
-    And Exists comment at publication "Movilidad en España" by "user2"
-      | comentario      |
-      | bueno           |
+    And Exists comment at publication "Movilidad en España"
+      | id_comentario   | comentario      |
+      | 0               | bueno           |
 
   Scenario: Edit owned comment registry
     Given I login as user "user2" with password "password"
-    When I view the details for comment "bueno"
-    And I edit the current comment
-      | comentario     |
-      | malo           |
-    Then I'm viewing the details page for comment at publication "The Tavern" by "user2"
-      | comentario     |
-      | malo           |
-    And There are 1 comments
+    When I edit the comment at publication with the id_comentario "0"
+      | id_comentario   | comentario      |
+      | 0               | malo           |
+    Then There are 1 comments
