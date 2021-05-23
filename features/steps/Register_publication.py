@@ -11,7 +11,7 @@ def step_impl(context, username):
     user = User.objects.get(username=username)
     from era.models import Publicacion
     for row in context.table:
-        publicacion = Publicacion(user=user) #Revisar register de profe
+        publicacion = Publicacion(user=user) #Revisar register de profe por
         for heading in row.headings:
             setattr(publicacion, heading, row[heading])
         publicacion.save()
