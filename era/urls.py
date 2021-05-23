@@ -32,7 +32,7 @@ urlpatterns = [
         LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Publicacion,
             form_class=PublicacionForm),
-        name='publication_edit'),
+        name='publicacion_edit'),
 
 
     ##  -----------------Comments-----------------------------------
@@ -49,7 +49,7 @@ urlpatterns = [
         CommentDetail.as_view(
             model=Comentario,
             template_name='era/comentario_detail.html'),
-        name='comentario_detail'),
+        name='comment_detail'),
 
     # Edit publication comment details, ex.: /era/publications/1/comments/1/edit/
     path('publicacion/<int:pkr>/comment/<int:pk>/edit',

@@ -43,8 +43,8 @@ def step_impl(context, count):
 def step_impl(context, name):
     from era.models import Publicacion
     publication = Publicacion.objects.get(titulo=name)
-    context.browser.visit(context.get_url('era:publication_edit', publication.pk))
-    if context.browser.url == context.get_url('era:publication_edit', publication.pk)\
+    context.browser.visit(context.get_url('era:publicacion_edit', publication.pk))
+    if context.browser.url == context.get_url('era:publicacion_edit', publication.pk)\
             and context.browser.find_by_tag('form'):
         form = context.browser.find_by_tag('form').first
         for heading in context.table.headings:
