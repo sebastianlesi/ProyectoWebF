@@ -11,7 +11,7 @@ I want to register a publication together with its text and multimedia.
         When I register publication
             | titulo                | Descripcion    | Vistas    |
             | Movilidad en España   | ingenieria     | 0         |
-        Then I'm viewing the details page for publication by "user"
+        Then I'm viewing the details page for publication
             | titulo                | Descripcion    | Vistas    |
             | Movilidad en España   | ingenieria     | 0         |
         And There are 1 publications

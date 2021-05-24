@@ -14,7 +14,7 @@ I want to register a comment in the corresponding publication together with its 
     When I register comment at publication "Movilidad en España"
       | id_comentario   | comentario      |
       | 0               | bueno           |
-    Then I'm viewing the details page for comment at publication "Movilidad en España" by "user"
+    Then I'm viewing the details page for comment at publication "Movilidad en España"
       | id_comentario   | comentario      |
       | 0               | bueno           |
     And There are 1 comments
