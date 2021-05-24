@@ -39,8 +39,9 @@ def step_impl(context, publication_name):
 @then('I\'m viewing the details page for comment at publication "{publication_name}"')
 def step_impl(context, publication_name):
     from era.models import Comentario, Publicacion
-    comentario = Comentario.objects.get(Publicacion.objects.get(titulo=publication_name))
-    context.browser.visit(context.get_url(publicacion))
+    publicacion = Publicacion.objects.get(titulo=publication_name)
+    comentario = Comentario.objects.get(publicacion=publicacion)
+    context.browser.visit(context.get_url(comentario))
 
 @then('There are {count:n} comments')
 def step_impl(context, count):

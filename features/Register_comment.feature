@@ -7,14 +7,14 @@ I want to register a comment in the corresponding publication together with its 
    Given Exists a user "user" with password "password"
    And Exists publication registered by "user"
       | titulo                     |
-      | Movilidad en España      |
+      | Movilidad en España        |
 
   Scenario: Register just comment name
     Given I login as user "user" with password "password"
     When I register comment at publication "Movilidad en España"
-      | id_comentario   | comentario      |
-      | 0               | bueno           |
+      | Comentario      |
+      | bueno           |
     Then I'm viewing the details page for comment at publication "Movilidad en España"
-      | id_comentario   | comentario      |
-      | 0               | bueno           |
+      | Comentario      |
+      | bueno           |
     And There are 1 comments
