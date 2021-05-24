@@ -6,15 +6,15 @@ I want to register a comment in the corresponding publication together with its 
  Background: There is a registered user and publication
    Given Exists a user "user" with password "password"
    And Exists publication registered by "user"
-      | name                     |
+      | titulo                     |
       | Movilidad en España      |
 
   Scenario: Register just comment name
     Given I login as user "user" with password "password"
     When I register comment at publication "Movilidad en España"
-      | comentario      |
-      | bueno           |
+      | id_comentario   | comentario      |
+      | 0               | bueno           |
     Then I'm viewing the details page for comment at publication "Movilidad en España" by "user"
-      | comentario      |
-      | bueno           |
+      | id_comentario   | comentario      |
+      | 0               | bueno           |
     And There are 1 comments

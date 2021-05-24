@@ -20,13 +20,13 @@ def step_impl(context, publication_name):
             setattr(comment, heading, row[heading])
         comment.save()
 
-@when('I register comment at pubication "{publication_name}"')
+@when('I register comment at publication "{publication_name}"')
 def step_impl(context, publication_name):
     from era.models import Publicacion
     publicacion = Publicacion.objects.get(titulo=publication_name)
     for row in context.table:
-        context.browser.visit(context.get_url('era:comment_create', publicacion_name))
-        if context.browser.url == context.get_url('era:comment_create', publicacion_name):
+        context.browser.visit(context.get_url('era:comment_create', publicacion.pk))
+        if context.browser.url == context.get_url('era:comment_create', publicacion.pk):
             form = context.browser.find_by_tag('form').first
             for heading in row.headings:
                 if heading == 'image':
