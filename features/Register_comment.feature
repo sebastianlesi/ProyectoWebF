@@ -14,7 +14,7 @@ I want to register a comment in the corresponding publication together with its 
     When I register comment at publication "Movilidad en España"
       | Comentario      |
       | bueno           |
-    Then I'm viewing the details page for comment at publication "Movilidad en España"
+    Then I'm viewing the details page for comment at publication "Movilidad en España" with comment "bueno"
       | Comentario      |
       | bueno           |
     And There are 1 comments

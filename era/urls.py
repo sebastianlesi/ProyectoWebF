@@ -34,6 +34,11 @@ urlpatterns = [
             form_class=PublicacionForm),
         name='publicacion_edit'),
 
+    path('publicacion/<int:pk>/delete',
+            LoginRequiredCheckIsOwnerUpdateView.as_view(
+                model=Publicacion,
+                form_class=PublicacionForm),
+            name='publicacion_delete'),
 
     ##  -----------------Comments-----------------------------------
      # Create a publication comment, ex.: /era/publicaciones/1/comments/create/
@@ -57,4 +62,10 @@ urlpatterns = [
             model=Comentario,
             form_class=ComentarioForm),
         name='comment_edit'),
+
+    path('publicacion/<int:pkr>/comment/<int:pk>/delete',
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
+            model=Comentario,
+            form_class=ComentarioForm),
+        name='comment_delete'),
 ]

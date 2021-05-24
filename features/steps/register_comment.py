@@ -36,12 +36,21 @@ def step_impl(context, publication_name):
                     context.browser.fill(heading, row[heading])
             form.find_by_value('Submit').first.click()
 
+#@then('I\'m viewing the details page for comment at publication "{publication_name}" with comment "{com}"')
+#def step_impl(context, publication_name, com):
+#   from era.models import Comentario, Publicacion
+#    publicacion = Publicacion.objects.get(titulo=publication_name)
+#   comentario = Comentario.objects.get(Comentario=com)
+#    context.browser.visit(context.get_url(comentario))
+
 @then('I\'m viewing the details page for comment at publication "{publication_name}"')
-def step_impl(context, publication_name):
+def step_impl(publication_name,context):
     from era.models import Comentario, Publicacion
-    publicacion = Publicacion.objects.get(titulo=publication_name)
-    comentario = Comentario.objects.get(publicacion=publicacion)
-    context.browser.visit(context.get_url(comentario))
+    publicacion2 = Publicacion.objects.get(titulo=publication_name)
+    comentario = Comentario.objects.all().filter(publicacion=publicacion2)
+    for c in comentario:
+     assert not context.browser.find_by_name(f'{publication_name}_{comentario.comentario}').is_empty()
+    #context.browser.find_by_name(f'{publication_name}_{comentario.comentario}')
 
 @then('There are {count:n} comments')
 def step_impl(context, count):
@@ -59,3 +68,7 @@ def step_impl(context, name):
         for heading in context.table.headings:
             context.browser.fill(heading, context.table[0][heading])
         form.find_by_value('Submit').first.click()
+
+@when(u'I try deleting the comment with comment "{com}"')
+def step_impl(context, com):
+    delete_from_model(context, com, kwargs={field:value})

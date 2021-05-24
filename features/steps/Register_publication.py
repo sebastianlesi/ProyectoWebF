@@ -11,7 +11,7 @@ def step_impl(context, username):
     user = User.objects.get(username=username)
     from era.models import Publicacion
     for row in context.table:
-        publicacion = Publicacion(user=user) #Revisar register de profe por
+        publicacion = Publicacion(user=user) 
         for heading in row.headings:
             setattr(publicacion, heading, row[heading])
         publicacion.save()
@@ -47,3 +47,7 @@ def step_impl(context, name):
         for heading in context.table.headings:
             context.browser.fill(heading, context.table[0][heading])
         form.find_by_value('Submit').first.click()
+
+@when(u'I try deleting the publication with title "{titulo}"')
+def step_impl(context, titulo):
+    delete_from_model(context, titulo, kwargs={field:value})
