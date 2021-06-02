@@ -4,7 +4,11 @@ Feature: Delete a comment
   I want to be able to delete my comment instance
 
   Background:  There are some comments
-    Given Exists comment at publication "movilidad"
+    Given Exists a user "user1" with password "password"
+    And Exists publication registered by "user1"
+      | titulo                   |
+      | movilidad      |
+    And Exists comment at publication "movilidad"
       | Comentario         |
       | bueno              |
       | malo               |
