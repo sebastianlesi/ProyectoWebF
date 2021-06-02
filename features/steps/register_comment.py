@@ -71,4 +71,8 @@ def step_impl(context, name):
 
 @when(u'I try deleting the comment with comment "{com}"')
 def step_impl(context, com):
-    delete_from_model(context, com, kwargs={field:value})
+    from era.models import Comentario
+    kwargs1={Comentario:com}
+    pr = Comentario.objects.filter(kwargs1).first()
+    print(f'{Comentario.__name__.lower()}/delete/{pr.pk}')
+    context.browser.visit(context.get_url(f'/{Comentario.__name__.lower()}/delete/{pr.pk}'))
