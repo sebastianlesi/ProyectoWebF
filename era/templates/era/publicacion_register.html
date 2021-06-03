@@ -1,0 +1,18 @@
+{% extends "era/base.html" %}
+{% load static %}
+
+{% block content %}
+<span vocab="https://schema.org/" typeof="BlogPosting">
+    <h1>Registro de publicacion</h1>
+    <form method="post" enctype="multipart/form-data" action="">
+        <fieldset><legend>Contenido</legend>
+            <p>Titulo</p>
+            <span property="name"><input name="Nombre" type="text" placeholder="Pepito Perez" required/></span>
+            <p>Descripcion</p>
+            <span property="articleBody"><textarea name="Observaciones" cols="20" rows="2" placeholder="Escribe aqui..." required></textarea></span>
+            <p>Fecha de publicacion </p>
+            <span property="dateCreated"><input type="date" name="FechaN" required/></span>
+        </fieldset>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

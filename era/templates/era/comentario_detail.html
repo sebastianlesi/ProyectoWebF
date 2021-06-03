@@ -1,6 +1,13 @@
 {% extends "era/base.html" %}
 {% block content %}
+<span vocab="https://schema.org/" typeof="Comment"></span>
 <h1>
-    {{ comentario.name }}
+    Comentario de <span property="name">Movilidad en Italia</span>
 </h1>
+<h2>Comentario</h2>
+    <p><span property="abstract">Bueno</span></p>
+<h2>Fecha</h2>
+    <p><span property="dateCreated">25/05/2021</span></p>
+<h2>Autor</h2>
+    <p><span property="author">Admin</span></p>
 {% endblock %}

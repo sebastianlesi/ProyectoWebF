@@ -1,0 +1,18 @@
+{% extends "era/base.html" %}
+{% load static %}
+
+{% block content %}
+<span vocab="https://schema.org/" typeof="BlogPosting"></span>
+    <h1>Registro de comentario</h1>
+    <form method="post" enctype="multipart/form-data" action="">
+        <h2>Publicacion: <span property="name">Movilidad en Italia</span></h2>
+        <fieldset><legend>Comentario</legend>
+            <span vocab="https://schema.org/" typeof="Comment"></span>
+            <p>Observaciones</p>
+            <span property="abstract"><textarea name="Observaciones" cols="20" rows="2" placeholder="Escribe aqui..." required></textarea></span>
+            <p>Fecha de publicacion </p>
+            <span property="dateCreated"><p><input type="date" name="FechaN" required/></p></span>
+        </fieldset>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

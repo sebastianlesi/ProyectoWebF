@@ -1,0 +1,15 @@
+{% extends "era/base.html" %}
+{% block content %}
+<h1>
+    Desea eliminar el comentario titulado: <span property="name">Movilidad en Italia</span>
+</h1>
+<form method="post" enctype="multipart/form-data" action="">
+    <input id="opc1" type="radio" value="Si"/>
+    <label for="opc1">Si</label>
+    <input id="opc2" type="radio" value="No" checked/>
+    <label for="opc2">No</label>
+    <input type="submit" value="Submit"/>
+</form>
+
+<h2>Eliminado con exito</h2>
+{% endblock %}
