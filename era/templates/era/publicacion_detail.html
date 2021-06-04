@@ -5,13 +5,13 @@
 </h1>
 <span vocab="https://schema.org/" typeof="Comment"></span>
 <h2>Titulo</h2>
-    <p><span property="name">Movilidad en Italia</span></p>
+    <p><span property="name">{{Publicacion.titulo}}</span></p>
 <h2>Descripcion</h2>
-    <p><span property="articleBody">Realize los cursos de proyecto web</span></p>
+    <p><span property="articleBody">{{Publicacion.descripcion}}</span></p>
 <h2>Fecha</h2>
-    <p><span property="dateCreated">30/05/2021</span></p>
+    <p><span property="dateCreated">{{Publicacion.fecha}}</span></p>
 <h2>Vistas</h2>
-    <p>2</p>
+    <p>{{Publicacion.vistas}}</p>
 <h2>Autor</h2>
-    <p><span property="author">Admin</span></p>
+    <p><span property="author">{{Publicacion.user}}</span></p>
 {% endblock %}
